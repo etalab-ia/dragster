@@ -1,0 +1,4 @@
+.env
+.envrc
+.turbo/
+# Note: .next/ is intentionally excluded (branch-specific cache, risky to copy)
