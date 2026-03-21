@@ -6,10 +6,10 @@ How to use Dragster skills with various AI coding agents.
 
 ```bash
 # Install all skills
-npx skills add etalab-ia/dragster --all
+npx skills add etalab-ia/dragster
 
 # Or install specific skills
-npx skills add etalab-ia/dragster --skill ingest-documents
+npx skills add etalab-ia/dragster --skill liteparse
 npx skills add etalab-ia/dragster --skill setup-knowledge-base
 npx skills add etalab-ia/dragster --skill search-knowledge-base
 ```
@@ -19,7 +19,7 @@ npx skills add etalab-ia/dragster --skill search-knowledge-base
 In Letta Code, invoke skills with `/`:
 
 ```
-/ingest-documents ./pdfs --output ./docs
+/liteparse ./pdfs --output ./docs
 /setup-knowledge-base ./docs --name my-project
 /search-knowledge-base "authentication flow"
 ```
@@ -79,9 +79,9 @@ If your agent isn't supported by the skills CLI, manually copy the SKILL.md file
 git clone https://github.com/etalab-ia/dragster.git
 
 # Copy skills to your agent's skills directory
-cp -r dragster/ingest-documents ~/.your-agent/skills/
-cp -r dragster/setup-knowledge-base ~/.your-agent/skills/
-cp -r dragster/search-knowledge-base ~/.your-agent/skills/
+cp -r dragster/skills/liteparse ~/.your-agent/skills/
+cp -r dragster/skills/setup-knowledge-base ~/.your-agent/skills/
+cp -r dragster/skills/search-knowledge-base ~/.your-agent/skills/
 ```
 
 ## MCP Integration (Future)
@@ -96,7 +96,7 @@ Iteration 1 will add MCP server support for:
 ### Skills not loading
 
 1. Check the skill directory exists: `ls ~/.your-agent/skills/`
-2. Verify SKILL.md format: `head -20 ~/.your-agent/skills/ingest-documents/SKILL.md`
+2. Verify SKILL.md format: `head -20 ~/.your-agent/skills/liteparse/SKILL.md`
 3. Restart your agent
 
 ### Tools not found
