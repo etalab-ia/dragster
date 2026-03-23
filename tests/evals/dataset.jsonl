@@ -1,0 +1,5 @@
+{"input": "Parse the PDF at ./tests/fixtures/sample.pdf and convert it to markdown", "ground_truth": "markdown", "skill": "liteparse"}
+{"input": "Create a knowledge base from the documents in ./docs", "ground_truth": "collection", "skill": "setup-knowledge-base"}
+{"input": "Search for information about API authentication in my knowledge base", "ground_truth": "results", "skill": "search-knowledge-base"}
+{"input": "I have a DOCX file that needs to be converted to text", "ground_truth": "lit parse", "skill": "liteparse"}
+{"input": "Index my markdown files for semantic search", "ground_truth": "qmd", "skill": "setup-knowledge-base"}
