@@ -1,5 +1,9 @@
 # Dragster
 
+[![Release](https://img.shields.io/github/v/release/etalab-ia/dragster?sort=date&style=flat-square)](https://github.com/etalab-ia/dragster/releases)
+[![License](https://img.shields.io/github/license/etalab-ia/dragster?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-beta-orange?style=flat-square)](https://github.com/etalab-ia/dragster)
+
 Skills for local document ingestion and semantic search. Built for AI coding agents (Letta Code, Claude Code, OpenCode, etc.).
 
 ## Quick Start
