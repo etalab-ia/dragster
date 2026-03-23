@@ -1,0 +1,28 @@
+[project]
+name = "dragster"
+version = "0.1.0"
+description = "Skills for local document ingestion and semantic search"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "letta-client>=0.1.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "letta-evals>=0.1.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "letta-evals>=0.1.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

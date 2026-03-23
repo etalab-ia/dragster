@@ -1,0 +1,62 @@
+name: Test Dragster Skills
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7.6.0
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --extra test
+
+      - name: Run skill tests
+        env:
+          LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
+        run: uv run python tests/test_skills_manual.py
+
+      - name: Run Letta Evals (if configured)
+        if: hashFiles('tests/evals/suite.yaml') != ''
+        env:
+          LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
+        run: |
+          cd tests/evals
+          uv run letta-evals run suite.yaml
+
+  lint-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate SKILL.md format
+        run: |
+          for skill_dir in skills/*/; do
+            skill_file="${skill_dir}SKILL.md"
+            if [ -f "$skill_file" ]; then
+              echo "Checking $skill_file..."
+              # Check for required frontmatter
+              if ! grep -q "^name:" "$skill_file"; then
+                echo "❌ Missing 'name' in frontmatter: $skill_file"
+                exit 1
+              fi
+              if ! grep -q "^description:" "$skill_file"; then
+                echo "❌ Missing 'description' in frontmatter: $skill_file"
+                exit 1
+              fi
+              echo "✓ $skill_file valid"
+            fi
+          done
