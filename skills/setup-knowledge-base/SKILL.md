@@ -23,7 +23,17 @@ Verify installation:
 qmd --version
 ```
 
-Documents must be in markdown format. Use `/ingest-documents` first to convert PDFs/DOCX.
+Documents must be in markdown format. Use `/liteparse` first to convert PDFs/DOCX.
+
+## Response Requirements
+
+When using this skill, always include:
+
+1. **Collection name** that will be created/used (e.g. `my-project`)
+2. **Source documents path** being indexed (e.g. `./docs`)
+3. **Where the index/collection is stored** (qmd collection location), and a verification command (`qmd status`)
+
+Never omit storage location details in your final answer.
 
 ## Workflow
 
