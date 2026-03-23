@@ -1,0 +1,38 @@
+name: dragster-skills-eval
+description: Evaluation suite for Dragster skills (liteparse, setup-knowledge-base, search-knowledge-base)
+
+# Test dataset
+dataset: dataset.jsonl
+
+# Target: Use an existing agent (set via AGENT_ID env var or default)
+target:
+  kind: agent
+  agent_id: ${AGENT_ID}
+  base_url: https://api.letta.com
+  token: ${LETTA_API_KEY}
+
+# Graders
+graders:
+  # Check if the correct skill was invoked
+  skill_invoked:
+    kind: tool
+    function: contains
+    args:
+      field: content
+      value: "${skill}"
+  
+  # LLM-based quality assessment
+  response_quality:
+    kind: rubric
+    model: openai:gpt-4o
+    rubric: |
+      Rate the agent's response quality (1-5):
+      - Did it understand the user's intent?
+      - Did it provide helpful, actionable guidance?
+      - Did it reference the correct tool/command?
+
+# Pass/fail gate
+gate:
+  metric_key: skill_invoked
+  op: gte
+  value: 0.8  # 80% of tests must pass
