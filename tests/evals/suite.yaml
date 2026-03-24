@@ -6,10 +6,10 @@ dataset: dataset.jsonl
 
 # Target: Use an existing agent (set via AGENT_ID env var or default)
 target:
-  kind: agent
+  kind: letta_agent
   agent_id: ${AGENT_ID}
   base_url: https://api.letta.com
-  token: ${LETTA_API_KEY}
+  api_key: ${LETTA_API_KEY}
 
 # Graders
 graders:
@@ -17,15 +17,14 @@ graders:
   skill_invoked:
     kind: tool
     function: contains
-    args:
-      field: content
-      value: "${skill}"
-  
+    extractor: last_assistant
+
   # LLM-based quality assessment
   response_quality:
-    kind: rubric
-    model: openai:gpt-4o
-    rubric: |
+    kind: model_judge
+    model: openai/gpt-4o
+    extractor: last_assistant
+    prompt: |
       Rate the agent's response quality (1-5):
       - Did it understand the user's intent?
       - Did it provide helpful, actionable guidance?
@@ -33,6 +32,8 @@ graders:
 
 # Pass/fail gate
 gate:
+  kind: simple
   metric_key: skill_invoked
+  aggregation: accuracy
   op: gte
   value: 0.8  # 80% of tests must pass
