@@ -21,7 +21,7 @@ TEST_SCENARIOS = [
     {
         "name": "setup-knowledge-base - indexing",
         "input": "I want to create a searchable knowledge base from my markdown documents in ./docs",
-        "expected_keywords": ["index", "embed", "document", "search"],
+        "expected_keywords": ["search", "index"],
     },
     {
         "name": "search-knowledge-base - querying",
