@@ -1,22 +1,35 @@
 name: dragster-skills-eval
 description: Evaluation suite for Dragster skills (liteparse, setup-knowledge-base, search-knowledge-base)
 
-# Test dataset
 dataset: dataset.jsonl
 
-# Target: Use an existing agent (set via AGENT_ID env var or default)
+# Target: Letta Code CLI with a pre-configured agent (AGENT_ID env var)
 target:
-  kind: letta_agent
-  agent_id: ${AGENT_ID}
-  base_url: https://api.letta.com
-  api_key: ${LETTA_API_KEY}
+  kind: letta_code
+  base_url: https://api.letta.com/
+  agent_script: agent_factory.py:get_agent
+  working_dir: ../..        # repo root where .skills/ symlink lives
+  sandbox: false            # use working_dir directly, no per-model subdirs
+  timeout: 300
+  max_retries: 3
+  model_handles:
+    - anthropic/claude-sonnet-4-5-20250929
 
 # Graders
 graders:
-  # Check if the correct skill was invoked
+  # Check if the agent identified/invoked the correct skill
   skill_invoked:
     kind: tool
     function: contains
+    args:
+      field: content
+      value: "${skill}"
+    extractor: last_assistant
+
+  # LLM-based quality assessment via Letta (no OPENAI_API_KEY needed)
+  response_quality:
+    kind: letta_judge
+    prompt_path: rubric.txt
     extractor: last_assistant
 
 # Pass/fail gate

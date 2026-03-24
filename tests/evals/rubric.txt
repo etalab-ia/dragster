@@ -1,0 +1,26 @@
+Evaluate the agent's response for skill routing quality.
+
+The agent was asked to perform a document-related task. It has access to these skills:
+- **liteparse**: Document parsing (PDF, DOCX, PPTX, XLSX, images) via LlamaParse
+- **setup-knowledge-base**: Index documents for semantic search via qmd
+- **search-knowledge-base**: Query an existing knowledge base via qmd
+
+Criteria:
+
+1. **Skill Identification (0.5 weight)**: Did the agent correctly identify and reference
+   the appropriate skill for the user's request? A correct match is essential.
+
+2. **Guidance Quality (0.3 weight)**: Did the agent provide helpful, actionable guidance
+   on how to use the skill? (e.g., correct commands, parameters, prerequisites)
+
+3. **Accuracy (0.2 weight)**: Are the tool names, commands, and instructions accurate?
+   No hallucinated tools or incorrect usage patterns.
+
+Scoring:
+- 1.0: Perfect — correct skill, clear guidance, accurate details
+- 0.75-0.99: Good — correct skill, minor guidance gaps
+- 0.5-0.74: Adequate — right direction but incomplete or unclear
+- 0.25-0.49: Poor — wrong skill or significantly misleading
+- 0.0-0.24: Failed — no relevant skill identified
+
+Use the submit_grade tool to submit your evaluation with a score between 0.0 and 1.0.
