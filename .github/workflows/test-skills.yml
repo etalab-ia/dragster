@@ -43,29 +43,43 @@ jobs:
 
   integration-letta-evals:
     # Optional integration gate: only runs when secrets are configured.
-    if: ${{ secrets.LETTA_API_KEY != '' && secrets.AGENT_ID != '' }}
+    # Note: secrets context is not available at job-level if, so we check in a step.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check if secrets are configured
+        id: check-secrets
+        run: |
+          if [ -n "${{ secrets.LETTA_API_KEY }}" ] && [ -n "${{ secrets.AGENT_ID }}" ]; then
+            echo "has-secrets=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-secrets=false" >> $GITHUB_OUTPUT
+            echo "::notice::Skipping integration tests - LETTA_API_KEY and/or AGENT_ID secrets not configured"
+          fi
+
       - name: Install uv
+        if: steps.check-secrets.outputs.has-secrets == 'true'
         uses: astral-sh/setup-uv@v7.6.0
 
       - name: Set up Python
+        if: steps.check-secrets.outputs.has-secrets == 'true'
         run: uv python install 3.11
 
       - name: Install dependencies
+        if: steps.check-secrets.outputs.has-secrets == 'true'
         run: uv sync --extra test
 
       - name: Run manual skill test script (API-backed)
+        if: steps.check-secrets.outputs.has-secrets == 'true'
         env:
           LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
           AGENT_ID: ${{ secrets.AGENT_ID }}
         run: uv run python tests/test_skills_manual.py
 
       - name: Run Letta Evals suite (API-backed)
-        if: hashFiles('tests/evals/suite.yaml') != ''
+        if: steps.check-secrets.outputs.has-secrets == 'true' && hashFiles('tests/evals/suite.yaml') != ''
         env:
           LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
           AGENT_ID: ${{ secrets.AGENT_ID }}
