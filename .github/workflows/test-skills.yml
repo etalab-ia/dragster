@@ -79,7 +79,7 @@ jobs:
         env:
           LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
           AGENT_ID: ${{ secrets.AGENT_ID }}
-        run: uv run python tests/test_skills_manual.py
+        run: uv run --no-project python tests/test_skills_manual.py
 
       - name: Run Letta Evals suite (API-backed)
         if: steps.check-secrets.outputs.has-secrets == 'true' && hashFiles('tests/evals/suite.yaml') != ''
@@ -88,4 +88,4 @@ jobs:
           AGENT_ID: ${{ secrets.AGENT_ID }}
         run: |
           cd tests/evals
-          uv run letta-evals run suite.yaml
+          uv run --no-project letta-evals run suite.yaml
