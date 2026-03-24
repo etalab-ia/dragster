@@ -51,8 +51,11 @@ jobs:
 
       - name: Check if secrets are configured
         id: check-secrets
+        env:
+          LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
+          AGENT_ID: ${{ secrets.AGENT_ID }}
         run: |
-          if [ -n "${{ secrets.LETTA_API_KEY }}" ] && [ -n "${{ secrets.AGENT_ID }}" ]; then
+          if [ -n "$LETTA_API_KEY" ] && [ -n "$AGENT_ID" ]; then
             echo "has-secrets=true" >> $GITHUB_OUTPUT
           else
             echo "has-secrets=false" >> $GITHUB_OUTPUT
@@ -69,7 +72,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.check-secrets.outputs.has-secrets == 'true'
-        run: uv sync --extra test
+        run: uv sync --extra test --no-install-project
 
       - name: Run manual skill test script (API-backed)
         if: steps.check-secrets.outputs.has-secrets == 'true'
