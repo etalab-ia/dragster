@@ -19,17 +19,6 @@ graders:
     function: contains
     extractor: last_assistant
 
-  # LLM-based quality assessment
-  response_quality:
-    kind: model_judge
-    model: openai/gpt-4o
-    extractor: last_assistant
-    prompt: |
-      Rate the agent's response quality (1-5):
-      - Did it understand the user's intent?
-      - Did it provide helpful, actionable guidance?
-      - Did it reference the correct tool/command?
-
 # Pass/fail gate
 gate:
   kind: simple
