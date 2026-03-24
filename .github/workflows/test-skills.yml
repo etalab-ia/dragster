@@ -41,46 +41,12 @@ jobs:
           test "$(readlink .agents/skills)" = "../skills" || (echo "❌ .agents/skills should link to ../skills" && exit 1)
           echo "✓ workspace skill symlinks valid"
 
-  integration-letta-evals:
-    # Informational integration job: runs when secrets are configured but does NOT
-    # block PRs. Skills require a Letta Code agent (with .skills/ loaded), not a
-    # plain Letta Cloud agent. Full letta_code target support is tracked separately.
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Check if secrets are configured
-        id: check-secrets
-        env:
-          LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
-          AGENT_ID: ${{ secrets.AGENT_ID }}
-        run: |
-          if [ -n "$LETTA_API_KEY" ] && [ -n "$AGENT_ID" ]; then
-            echo "has-secrets=true" >> $GITHUB_OUTPUT
-          else
-            echo "has-secrets=false" >> $GITHUB_OUTPUT
-            echo "::notice::Skipping integration tests - LETTA_API_KEY and/or AGENT_ID secrets not configured"
-          fi
-
-      - name: Install uv
-        if: steps.check-secrets.outputs.has-secrets == 'true'
-        uses: astral-sh/setup-uv@v7.6.0
-
-      - name: Set up Python
-        if: steps.check-secrets.outputs.has-secrets == 'true'
-        run: uv python install 3.11
-
-      - name: Install dependencies
-        if: steps.check-secrets.outputs.has-secrets == 'true'
-        run: uv sync --extra test --no-install-project
-
-      - name: Run Letta Evals suite (API-backed)
-        if: steps.check-secrets.outputs.has-secrets == 'true' && hashFiles('tests/evals/suite.yaml') != ''
-        env:
-          LETTA_API_KEY: ${{ secrets.LETTA_API_KEY }}
-          AGENT_ID: ${{ secrets.AGENT_ID }}
-        run: |
-          cd tests/evals
-          uv run --no-project letta-evals run suite.yaml
+  # NOTE: Letta Evals integration disabled for now.
+  # Secrets are not available to PR workflows from forks (GitHub security feature).
+  # The proper approach is to use `kind: letta_code` target with Letta Code CLI
+  # installed in the runner. Will be re-enabled in a follow-up PR.
+  #
+  # For manual testing:
+  #   export LETTA_API_KEY=your_key
+  #   export AGENT_ID=your_agent_with_skills
+  #   uv run --no-project python tests/test_skills_manual.py
