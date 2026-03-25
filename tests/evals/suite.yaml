@@ -20,16 +20,6 @@ graders:
     args:
       field: content
       value: "${skill}"
-  
-  # LLM-based quality assessment
-  response_quality:
-    kind: rubric
-    model: openai:gpt-4o
-    rubric: |
-      Rate the agent's response quality (1-5):
-      - Did it understand the user's intent?
-      - Did it provide helpful, actionable guidance?
-      - Did it reference the correct tool/command?
 
 # Pass/fail gate
 gate:
