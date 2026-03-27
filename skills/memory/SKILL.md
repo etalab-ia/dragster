@@ -2,6 +2,7 @@
 name: memory
 description: Maintain persistent memory for document ingestion and issues. Use when ingesting documents, tracking parsing problems, or recalling collection state. Works with ctx for cross-session persistence.
 license: MIT
+enabled: true
 allowed-tools: Bash, Read, Write
 ---
 
@@ -64,11 +65,25 @@ The files in this skill directory (`skills/memory/`) are **templates** for refer
    cp skills/memory/COLLECTIONS.md .context/
    cp skills/memory/ISSUES.md .context/
    ```
-4. Add dragster-specific patterns to LEARNINGS.md:
+4. Copy ctx configuration (optional, enables hooks):
+   ```bash
+   cp skills/memory/ctxrc.template .ctxrc
+   ```
+5. Add dragster-specific patterns to LEARNINGS.md:
    ```bash
    ctx add learning "French government PDFs require --ocr-language fra"
    ctx add learning "Scanned documents benefit from --dpi 300"
    ```
+
+---
+
+## Enable/Disable
+
+Set `enabled: false` in the frontmatter to disable this skill.
+
+When disabled, the skill won't be loaded by Letta Code and hooks won't fire.
+
+To re-enable: change back to `enabled: true`.
 
 ---
 
@@ -120,3 +135,41 @@ This skill integrates with ctx's memory system:
 - `ctx agent` includes COLLECTIONS.md and ISSUES.md in context packets
 - `ctx add learning` promotes patterns to persistent memory
 - `ctx status` shows memory file health
+
+---
+
+## Hooks
+
+Hooks provide automatic reminders at key points in the agent lifecycle.
+
+### Available Hooks
+
+| Hook | When | Reminder |
+|------|------|----------|
+| `session_start` | Session begins | Load memory context |
+| `post_ingestion` | After `lit parse` or `qmd` | Record ingestion |
+| `pre_compact` | Before context compaction | Save state |
+
+### Configuration
+
+Hooks are configured in `.ctxrc` (copy from `skills/memory/ctxrc.template`):
+
+```yaml
+# .ctxrc
+[hooks.session_start]
+reminder = "📦 Memory: Read .context/COLLECTIONS.md and .context/ISSUES.md"
+
+[hooks.post_tool_use]
+match = "lit parse|qmd collection"
+reminder = "Record this ingestion in .context/COLLECTIONS.md"
+
+[freshness_files]
+  - path: .context/COLLECTIONS.md
+    desc: Document collection state
+  - path: .context/ISSUES.md
+    desc: Parsing problems and workarounds
+```
+
+### Disabling Hooks
+
+Set `enabled: false` in this skill's frontmatter to disable all hooks.
