@@ -1,0 +1,3 @@
+# Runtime symlinks for skill discovery
+.skills/
+.agents/
