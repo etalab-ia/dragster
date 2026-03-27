@@ -30,6 +30,19 @@ jobs:
             echo "✓ $skill_file valid"
           done
 
+      - name: Setup runtime skill symlinks
+        run: |
+          # Create .skills directory with individual symlinks
+          mkdir -p .skills
+          for skill in skills/*/; do
+            skill_name=$(basename "$skill")
+            ln -s "../skills/$skill_name" ".skills/$skill_name"
+          done
+          # Create .agents/skills symlink for Vercel CLI
+          mkdir -p .agents
+          ln -s ../skills .agents/skills
+          echo "✓ Runtime symlinks created"
+
       - name: Validate workspace symlink strategy
         run: |
           # .skills is a real directory (not a symlink)
