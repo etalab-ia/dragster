@@ -26,9 +26,9 @@ npm install -g @llamaindex/liteparse
 npx skills add etalab-ia/dragster
 
 # Or install individual skills
-npx skills add etalab-ia/dragster --skill liteparse
-npx skills add etalab-ia/dragster --skill qmd/setup
-npx skills add etalab-ia/dragster --skill qmd/search
+npx skills add etalab-ia/dragster --skill parse
+npx skills add etalab-ia/dragster --skill setup
+npx skills add etalab-ia/dragster --skill search
 ```
 
 ## Skills
