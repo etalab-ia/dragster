@@ -1,6 +1,11 @@
 ---
-name: setup-knowledge-base
-description: Index a document corpus with qmd for semantic search. Use when the user wants to set up a knowledge base, create a searchable index from markdown documents, or enable semantic search. Triggers on keywords like "index documents", "create knowledge base", "setup search", "semantic search".
+name: setup
+provider: qmd
+available-providers:
+  - qmd
+  - pinecone
+  - weaviate
+description: Index a document corpus for semantic search. Use when the user wants to set up a knowledge base, create a searchable index from markdown documents, or enable semantic search. Triggers on keywords like "index documents", "create knowledge base", "setup search", "semantic search".
 license: MIT
 allowed-tools: Bash
 ---
@@ -23,7 +28,7 @@ Verify installation:
 qmd --version
 ```
 
-Documents must be in markdown format. Use `/liteparse` first to convert PDFs/DOCX.
+Documents must be in markdown format. Use `/parse` first to convert PDFs/DOCX.
 
 ## Response Requirements
 
@@ -141,4 +146,26 @@ If embeddings fail:
 
 ## Next Steps
 
-After setting up the knowledge base, use `/search-knowledge-base` to search your documents.
+After setting up the knowledge base, use `/search` to search your documents.
+
+## Provider-Specific Notes
+
+### qmd (current)
+
+- Storage: Local SQLite with sqlite-vec extension
+- Embeddings: Local model (no API key required)
+- Best for: Small to medium corpora, offline usage
+
+### pinecone (planned)
+
+- Storage: Pinecone cloud
+- Embeddings: OpenAI or custom embeddings
+- Best for: Large-scale production deployments
+- Setup: Requires `PINECONE_API_KEY` environment variable
+
+### weaviate (planned)
+
+- Storage: Weaviate instance (self-hosted or cloud)
+- Embeddings: Configurable
+- Best for: Enterprise deployments with hybrid search
+- Setup: Requires `WEAVIATE_URL` and optionally `WEAVIATE_API_KEY`

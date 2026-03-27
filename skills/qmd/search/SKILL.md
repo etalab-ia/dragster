@@ -1,6 +1,11 @@
 ---
-name: search-knowledge-base
-description: Search the qmd index for relevant documents. Use when the user wants to find documents in their indexed corpus, has questions that could be answered by their documents, or needs context from their knowledge base. Triggers on keywords like "search documents", "find in knowledge base", "query index".
+name: search
+provider: qmd
+available-providers:
+  - qmd
+  - pinecone
+  - weaviate
+description: Search the knowledge base for relevant documents. Use when the user wants to find documents in their indexed corpus, has questions that could be answered by their documents, or needs context from their knowledge base. Triggers on keywords like "search documents", "find in knowledge base", "query index".
 license: MIT
 allowed-tools: Bash
 ---
@@ -12,7 +17,7 @@ Search the qmd index for relevant documents.
 ## Prerequisites
 
 - qmd installed: `bun install -g @tobilu/qmd`
-- Collection set up: Use `/setup-knowledge-base` first
+- Collection set up: Use `/setup` first
 
 Verify setup:
 
@@ -116,3 +121,23 @@ If no results:
 1. Check collection exists: `qmd status`
 2. Verify embeddings generated: `qmd embed`
 3. Try broader query terms
+
+## Provider-Specific Notes
+
+### qmd (current)
+
+- Storage: Local SQLite with sqlite-vec extension
+- Embeddings: Local model (no API key required)
+- Best for: Small to medium corpora, offline usage
+
+### pinecone (planned)
+
+- Storage: Pinecone cloud
+- Embeddings: OpenAI or custom embeddings
+- Best for: Large-scale production deployments
+
+### weaviate (planned)
+
+- Storage: Weaviate instance (self-hosted or cloud)
+- Embeddings: Configurable
+- Best for: Enterprise deployments with hybrid search

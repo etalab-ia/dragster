@@ -27,27 +27,47 @@ npx skills add etalab-ia/dragster
 
 # Or install individual skills
 npx skills add etalab-ia/dragster --skill liteparse
-npx skills add etalab-ia/dragster --skill setup-knowledge-base
-npx skills add etalab-ia/dragster --skill search-knowledge-base
+npx skills add etalab-ia/dragster --skill qmd/setup
+npx skills add etalab-ia/dragster --skill qmd/search
 ```
 
 ## Skills
 
-| Skill | Purpose | Tool |
-|-------|---------|------|
-| `liteparse` | PDF/DOCX/PPTX/XLSX/Images → Markdown/JSON | [liteparse](https://github.com/run-llama/liteparse) |
-| `setup-knowledge-base` | Index documents for semantic search | [qmd](https://github.com/tobi/qmd) |
-| `search-knowledge-base` | Search indexed documents | [qmd](https://github.com/tobi/qmd) |
+| Skill | Purpose | Provider |
+|-------|---------|----------|
+| `parse` | PDF/DOCX/PPTX/XLSX/Images → Markdown/JSON | [liteparse](https://github.com/run-llama/liteparse) |
+| `setup` | Index documents for semantic search | [qmd](https://github.com/tobi/qmd) |
+| `search` | Search indexed documents | [qmd](https://github.com/tobi/qmd) |
 
 ## Workflow
 
 ```
-Documents ──[liteparse]──> Markdown ──[setup-knowledge-base]──> Index ──[search-knowledge-base]──> Results
+Documents ──[/parse]──> Markdown ──[/setup]──> Index ──[/search]──> Results
 ```
 
 1. **Parse**: Convert documents to markdown or JSON (PDF, DOCX, PPTX, XLSX, images)
 2. **Index**: Create searchable embeddings with qmd
 3. **Search**: Query your knowledge base
+
+## Provider System
+
+Skills support multiple providers via metadata in each SKILL.md:
+
+```yaml
+---
+name: search
+provider: qmd
+available-providers:
+  - qmd
+  - pinecone
+  - weaviate
+---
+```
+
+- **provider**: Current active provider (editable by agents)
+- **available-providers**: Providers this skill can support
+
+To switch providers, ask your agent to update the `provider` field in the skill file.
 
 ## Integration
 
