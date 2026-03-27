@@ -32,8 +32,23 @@ jobs:
 
       - name: Validate workspace symlink strategy
         run: |
-          test -L .skills || (echo "❌ .skills must be a symlink to skills/" && exit 1)
-          test "$(readlink .skills)" = "skills" || (echo "❌ .skills should link to skills" && exit 1)
+          # .skills is a real directory (not a symlink)
+          if ! test -d .skills; then
+            echo "❌ .skills must be a directory"
+            exit 1
+          fi
+          if test -L .skills; then
+            echo "❌ .skills should be a directory, not a symlink"
+            exit 1
+          fi
+          # Individual skill symlinks inside .skills/
+          for skill in parse search setup; do
+            if ! test -L ".skills/$skill"; then
+              echo "❌ .skills/$skill must be a symlink"
+              exit 1
+            fi
+          done
+          # .agents/skills remains a symlink to ../skills
           test -L .agents/skills || (echo "❌ .agents/skills must be a symlink" && exit 1)
           test "$(readlink .agents/skills)" = "../skills" || (echo "❌ .agents/skills should link to ../skills" && exit 1)
           echo "✓ workspace skill symlinks valid"
