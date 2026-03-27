@@ -3,3 +3,6 @@
 {"input": "Search for information about API authentication in my knowledge base", "ground_truth": "results", "skill": "search-knowledge-base"}
 {"input": "I have a DOCX file that needs to be converted to text", "ground_truth": "lit parse", "skill": "liteparse"}
 {"input": "Index my markdown files for semantic search", "ground_truth": "qmd", "skill": "setup-knowledge-base"}
+{"input": "What document collections have we indexed?", "ground_truth": "COLLECTIONS.md", "skill": "memory"}
+{"input": "Record that we just ingested 15 PDFs into the legal-docs collection", "ground_truth": "ingestion", "skill": "memory"}
+{"input": "There was a parsing error with contracts/agreement.pdf, how do I track this?", "ground_truth": "ISSUES.md", "skill": "memory"}

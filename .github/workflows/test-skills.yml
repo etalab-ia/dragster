@@ -18,7 +18,7 @@ jobs:
         run: |
           find skills -name "SKILL.md" | while read skill_file; do
             echo "Checking $skill_file..."
-            # Check for required frontmatter
+            # Check for required frontmatter (name, description) and optional enabled field
             if ! grep -q "^name:" "$skill_file"; then
               echo "❌ Missing 'name' in frontmatter: $skill_file"
               exit 1
@@ -26,6 +26,17 @@ jobs:
             if ! grep -q "^description:" "$skill_file"; then
               echo "❌ Missing 'description' in frontmatter: $skill_file"
               exit 1
+            fi
+            # Check for enabled field (optional, defaults to true if missing)
+            if grep -q "^enabled:" "$skill_file"; then
+              enabled_value=$(grep "^enabled:" "$skill_file" | cut -d' ' -f2)
+              if [ "$enabled_value" != "true" ] && [ "$enabled_value" != "false" ]; then
+                echo "❌ Invalid 'enabled' value in $skill_file: must be 'true' or 'false'"
+                exit 1
+              fi
+              echo "  ✓ enabled=$enabled_value"
+            else
+              echo "  ✓ enabled=true (default)"
             fi
             echo "✓ $skill_file valid"
           done

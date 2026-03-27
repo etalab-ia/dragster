@@ -1,5 +1,5 @@
 name: dragster-skills-eval
-description: Evaluation suite for Dragster skills (liteparse, setup-knowledge-base, search-knowledge-base)
+description: Evaluation suite for Dragster skills (liteparse, setup-knowledge-base, search-knowledge-base, memory)
 
 dataset: dataset.jsonl
 
