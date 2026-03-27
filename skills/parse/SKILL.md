@@ -1,5 +1,8 @@
 ---
-name: liteparse
+name: parse
+provider: liteparse
+available-providers:
+  - liteparse
 description: Use this skill when the user asks to parse, perform multi-format document conversion or spatially extract text from an unstructured file (PDF, DOCX, PPTX, XLSX, images, etc.) locally without cloud dependencies.
 compatibility: Requires Node 18+ and `@llamaindex/liteparse` installed globally via npm (`npm i -g @llamaindex/liteparse`)
 license: MIT

@@ -16,21 +16,18 @@ jobs:
 
       - name: Validate SKILL.md format
         run: |
-          for skill_dir in skills/*/; do
-            skill_file="${skill_dir}SKILL.md"
-            if [ -f "$skill_file" ]; then
-              echo "Checking $skill_file..."
-              # Check for required frontmatter
-              if ! grep -q "^name:" "$skill_file"; then
-                echo "❌ Missing 'name' in frontmatter: $skill_file"
-                exit 1
-              fi
-              if ! grep -q "^description:" "$skill_file"; then
-                echo "❌ Missing 'description' in frontmatter: $skill_file"
-                exit 1
-              fi
-              echo "✓ $skill_file valid"
+          find skills -name "SKILL.md" | while read skill_file; do
+            echo "Checking $skill_file..."
+            # Check for required frontmatter
+            if ! grep -q "^name:" "$skill_file"; then
+              echo "❌ Missing 'name' in frontmatter: $skill_file"
+              exit 1
             fi
+            if ! grep -q "^description:" "$skill_file"; then
+              echo "❌ Missing 'description' in frontmatter: $skill_file"
+              exit 1
+            fi
+            echo "✓ $skill_file valid"
           done
 
       - name: Validate workspace symlink strategy
