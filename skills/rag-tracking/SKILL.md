@@ -6,9 +6,9 @@ enabled: true
 allowed-tools: Bash, Read, Write
 ---
 
-# Memory Skill
+# rag-tracking Skill
 
-Persistent memory for dragster document processing. Track collections, ingestion history, and issues across sessions.
+External persistent memory for document ingestion and issues, designed for agents without built-in memory. This skill uses **ctx** under the hood for cross-session persistence.
 
 ## When to Use This Skill
 

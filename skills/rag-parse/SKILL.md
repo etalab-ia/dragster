@@ -11,9 +11,9 @@ metadata:
   version: "0.1.0"
 ---
 
-# LiteParse Skill
+# rag-parse Skill
 
-Parse unstructured documents (PDF, DOCX, PPTX, XLSX, images, and more) locally with LiteParse: fast, lightweight, no cloud dependencies or LLM required.
+Parse unstructured documents (PDF, DOCX, PPTX, XLSX, images, and more) locally. This skill uses **LiteParse** (`lit` CLI) under the hood — fast, lightweight, no cloud dependencies or LLM required.
 
 ## Initial Setup
 
