@@ -19,7 +19,7 @@ Skills for local document ingestion and semantic search. Built for AI coding age
 
 ```bash
 # Install tools
-bun install -g @tobilu/qmd
+npm install -g @tobilu/qmd
 npm install -g @llamaindex/liteparse
 
 # Install all skills
@@ -94,7 +94,7 @@ See [docs/integration-guide.md](docs/integration-guide.md) for detailed setup in
 
 - Node.js 18+ or Bun
 - liteparse: `npm install -g @llamaindex/liteparse`
-- qmd: `bun install -g @tobilu/qmd`
+- qmd: `npm install -g @tobilu/qmd`
 
 ## License
 
