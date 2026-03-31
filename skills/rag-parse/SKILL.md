@@ -1,5 +1,5 @@
 ---
-name: parse
+name: rag-parse
 provider: liteparse
 available-providers:
   - liteparse

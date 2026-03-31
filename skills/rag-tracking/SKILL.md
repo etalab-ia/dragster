@@ -1,6 +1,6 @@
 ---
-name: memory
-description: Maintain persistent memory for document ingestion and issues. Use when ingesting documents, tracking parsing problems, or recalling collection state. Works with ctx for cross-session persistence.
+name: rag-tracking
+description: External persistent memory for document ingestion and issues, designed for agents without built-in memory (Claude Code, Codex, OpenCode). Use when ingesting documents, tracking parsing problems, or recalling collection state. Works with ctx for cross-session persistence. NOT needed for Letta Code which has native memory.
 license: MIT
 enabled: true
 allowed-tools: Bash, Read, Write
@@ -9,6 +9,19 @@ allowed-tools: Bash, Read, Write
 # Memory Skill
 
 Persistent memory for dragster document processing. Track collections, ingestion history, and issues across sessions.
+
+## When to Use This Skill
+
+**Use this skill when:**
+- Working with agents that lack persistent memory (Claude Code, Codex, OpenCode, etc.)
+- Sharing ingestion state across multiple agents or team members
+- Running in CI/CD environments where agent memory doesn't persist
+
+**NOT needed for:**
+- Letta Code — has built-in persistent memory (system, progressive, recall)
+- Any agent platform with native long-term memory support
+
+For Letta Code users, simply store collection state in your agent's memory files instead.
 
 ## Memory Files
 
