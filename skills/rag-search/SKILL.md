@@ -10,9 +10,9 @@ license: MIT
 allowed-tools: Bash
 ---
 
-# Search Knowledge Base
+# rag-search Skill
 
-Search the qmd index for relevant documents.
+Search the qmd index for relevant documents. This skill uses **qmd** under the hood.
 
 ## Prerequisites
 

@@ -10,9 +10,9 @@ license: MIT
 allowed-tools: Bash
 ---
 
-# Setup Knowledge Base
+# rag-index Skill
 
-Index a document corpus with qmd for semantic search.
+Index a document corpus for semantic search. This skill uses **qmd** under the hood.
 
 ## Prerequisites
 
