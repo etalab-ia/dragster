@@ -1,5 +1,5 @@
 ---
-name: setup
+name: rag-index
 provider: qmd
 available-providers:
   - qmd
@@ -28,7 +28,7 @@ Verify installation:
 qmd --version
 ```
 
-Documents must be in markdown format. Use `/parse` first to convert PDFs/DOCX.
+Documents must be in markdown format. Use `/rag-parse` first to convert PDFs/DOCX.
 
 ## Response Requirements
 
@@ -146,7 +146,7 @@ If embeddings fail:
 
 ## Next Steps
 
-After setting up the knowledge base, use `/search` to search your documents.
+After setting up the knowledge base, use `/rag-search` to search your documents.
 
 ## Provider-Specific Notes
 

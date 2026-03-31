@@ -1,5 +1,5 @@
 ---
-name: search
+name: rag-search
 provider: qmd
 available-providers:
   - qmd
@@ -17,7 +17,7 @@ Search the qmd index for relevant documents.
 ## Prerequisites
 
 - qmd installed: `bun install -g @tobilu/qmd`
-- Collection set up: Use `/setup` first
+- Collection set up: Use `/rag-index` first
 
 Verify setup:
 

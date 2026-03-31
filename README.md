@@ -26,23 +26,27 @@ npm install -g @llamaindex/liteparse
 npx skills add etalab-ia/dragster
 
 # Or install individual skills
-npx skills add etalab-ia/dragster --skill parse
-npx skills add etalab-ia/dragster --skill setup
-npx skills add etalab-ia/dragster --skill search
+npx skills add etalab-ia/dragster --skill rag-parse
+npx skills add etalab-ia/dragster --skill rag-index
+npx skills add etalab-ia/dragster --skill rag-search
+npx skills add etalab-ia/dragster --skill rag-tracking
 ```
 
 ## Skills
 
 | Skill | Purpose | Provider |
 |-------|---------|----------|
-| `parse` | PDF/DOCX/PPTX/XLSX/Images → Markdown/JSON | [liteparse](https://github.com/run-llama/liteparse) |
-| `setup` | Index documents for semantic search | [qmd](https://github.com/tobi/qmd) |
-| `search` | Search indexed documents | [qmd](https://github.com/tobi/qmd) |
+| `rag-parse` | PDF/DOCX/PPTX/XLSX/Images → Markdown/JSON | [liteparse](https://github.com/run-llama/liteparse) |
+| `rag-index` | Index documents for semantic search | [qmd](https://github.com/tobi/qmd) |
+| `rag-search` | Search indexed documents | [qmd](https://github.com/tobi/qmd) |
+| `rag-tracking` | Track ingestion state & issues | ctx (optional) |
+
+> **Note**: `rag-tracking` is designed for agents without built-in memory (Claude Code, Codex, OpenCode). Not needed for Letta Code which has native persistent memory.
 
 ## Workflow
 
 ```
-Documents ──[/parse]──> Markdown ──[/setup]──> Index ──[/search]──> Results
+Documents ──[/rag-parse]──> Markdown ──[/rag-index]──> Index ──[/rag-search]──> Results
 ```
 
 1. **Parse**: Convert documents to markdown or JSON (PDF, DOCX, PPTX, XLSX, images)

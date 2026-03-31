@@ -11,13 +11,13 @@ Run in Letta Code:
 ```
 
 Expected skills:
-- `liteparse`
-- `setup-knowledge-base`
-- `search-knowledge-base`
+- `rag-parse`
+- `rag-index`
+- `rag-search`
 
 ---
 
-## 1) Test `liteparse` selection
+## 1) Test `rag-parse` selection
 
 Prompt:
 
@@ -26,13 +26,13 @@ I need to parse a PDF at ./tests/fixtures/sample.pdf into markdown. Please use t
 ```
 
 Pass criteria:
-- Mentions/uses `liteparse`
+- Mentions/uses `rag-parse`
 - Suggests `lit parse ...`
 - Gives a concrete command and output path
 
 ---
 
-## 2) Test `setup-knowledge-base`
+## 2) Test `rag-index`
 
 Prompt:
 
@@ -41,7 +41,7 @@ I have markdown files in ./docs and want a searchable knowledge base. Use the ri
 ```
 
 Pass criteria:
-- Uses `setup-knowledge-base`
+- Uses `rag-index`
 - Gives `qmd` setup/indexing flow
 - Explicitly states **collection name** and **source path**
 - Explicitly states where the index/collection is stored and includes `qmd status` for verification
@@ -52,7 +52,7 @@ Fail criteria:
 
 ---
 
-## 3) Test `search-knowledge-base`
+## 3) Test `rag-search`
 
 Prompt:
 
@@ -61,7 +61,7 @@ Now search that knowledge base for “authentication flow” and show the exact 
 ```
 
 Pass criteria:
-- Uses `search-knowledge-base`
+- Uses `rag-search`
 - Gives a concrete `qmd` query/search command
 - Briefly explains result interpretation (e.g., score/snippet/source)
 
@@ -91,8 +91,8 @@ I want to convert DOCX to markdown and then semantically search it. Which skills
 ```
 
 Pass criteria:
-- Selects `liteparse` for conversion
-- Selects `setup-knowledge-base` + `search-knowledge-base` for indexing/search
+- Selects `rag-parse` for conversion
+- Selects `rag-index` + `rag-search` for indexing/search
 - Explains tool choice clearly
 
 ---
@@ -102,9 +102,9 @@ Pass criteria:
 | Test | Pass/Fail | Notes |
 |------|-----------|-------|
 | 0. Skills listed |  |  |
-| 1. liteparse |  |  |
-| 2. setup-knowledge-base |  |  |
-| 3. search-knowledge-base |  |  |
+| 1. rag-parse |  |  |
+| 2. rag-index |  |  |
+| 3. rag-search |  |  |
 | 4. End-to-end |  |  |
 | 5. Negative/control |  |  |
 
