@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.2.0](https://github.com/etalab-ia/dragster/compare/v0.1.1...v0.2.0) (2026-03-31)
+
+
+### Features
+
+* add hooks, enable/disable, and ctx config for memory skill ([28a73c5](https://github.com/etalab-ia/dragster/commit/28a73c511ba5520060f31d7032f560b112e3833b))
+* add memory skill for document ingestion tracking ([edeb898](https://github.com/etalab-ia/dragster/commit/edeb898e78d287aaa67695b006c81d9957836c16))
+* add memory skill for document ingestion tracking ([ed5f6c8](https://github.com/etalab-ia/dragster/commit/ed5f6c8a36898939584041560e219d3ec59c5681))
+* reorganize skills with provider metadata ([db18c2b](https://github.com/etalab-ia/dragster/commit/db18c2be57ddfc6c35195eee2273de07620e277d))
+* reorganize skills with provider metadata ([549e04b](https://github.com/etalab-ia/dragster/commit/549e04bea5f52170ec1f91c19ab7db43856f86d6))
+
+
+### Bug Fixes
+
+* **ci:** update symlink validation for new .skills structure ([38dc879](https://github.com/etalab-ia/dragster/commit/38dc879f9f55337ba82241b7004cf9c5d2418b82))
+* move skills to top-level directories ([880ed86](https://github.com/etalab-ia/dragster/commit/880ed86fffc258d9b8708d0c28db8d36ad8db5bb))
+* update worktrunk hook name (post-create → pre-start) ([8d6a953](https://github.com/etalab-ia/dragster/commit/8d6a953ee3e5fedd40ee39ecefbf1914da7fd466))
+* use individual skill symlinks instead of whole-directory symlink ([4cdb5a9](https://github.com/etalab-ia/dragster/commit/4cdb5a975ee4fb0d38995e6716676d52d3fb6e50))
+* use individual skill symlinks instead of whole-directory symlink ([f454f37](https://github.com/etalab-ia/dragster/commit/f454f3797884caa9224dd0bab7a415b848c40b42))
+
 ## [0.1.1](https://github.com/etalab-ia/dragster/compare/v0.1.0...v0.1.1) (2026-03-25)
 
 
