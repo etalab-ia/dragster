@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/etalab-ia/dragster/compare/v0.2.0...v0.3.0) (2026-04-03)
+
+
+### Features
+
+* add script to delete letta-evals judge agents ([4ae33a6](https://github.com/etalab-ia/dragster/commit/4ae33a645a744f3a9c05303f2ee5861c70afd332))
+* add script to delete letta-evals judge agents ([9837830](https://github.com/etalab-ia/dragster/commit/9837830f4716e61e5312546466d177fab7d5e79b))
+
+
+### Bug Fixes
+
+* add cleanup attribute to letta-evals suite to prevent agent accumulation ([172c2ea](https://github.com/etalab-ia/dragster/commit/172c2ead49e424f2a1b43f11ab72056550d15bce))
+* add cleanup attribute to letta-evals suite to prevent agent accumulation ([1aacc8c](https://github.com/etalab-ia/dragster/commit/1aacc8cad7f00644339878ddb91378fb9129eed1))
+* align skill titles with frontmatter names ([8934224](https://github.com/etalab-ia/dragster/commit/8934224ce2a4d86849eb9bb6d1fd7202a4bd2e11))
+* align skill titles with frontmatter names ([e20d3a3](https://github.com/etalab-ia/dragster/commit/e20d3a36d2b92cbd8453d922756594bafd8572d9))
+* standardize to npm and update CI for new skill names ([b4793a1](https://github.com/etalab-ia/dragster/commit/b4793a11e30d78bc879754480410cc449059a50f))
+
 ## [0.2.0](https://github.com/etalab-ia/dragster/compare/v0.1.1...v0.2.0) (2026-03-31)
 
 
