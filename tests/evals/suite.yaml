@@ -3,6 +3,10 @@ description: Evaluation suite for Dragster skills (liteparse, setup-knowledge-ba
 
 dataset: dataset.jsonl
 
+# Cleanup: delete agents created during evaluation after each sample completes
+# Pre-existing agents (target.agent_id) are never deleted
+cleanup: true
+
 # Target: Letta Code CLI with a pre-configured agent (AGENT_ID env var)
 target:
   kind: letta_code
