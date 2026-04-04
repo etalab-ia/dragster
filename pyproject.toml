@@ -16,8 +16,8 @@ test = [
     "pytest-asyncio>=0.23.0",
 ]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "letta-evals @ git+https://github.com/letta-ai/letta-evals.git@letta-evals-v0.13.0",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
