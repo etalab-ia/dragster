@@ -70,17 +70,26 @@ The files in this skill directory (`skills/memory/`) are **templates** for refer
 
 ### Initial Setup
 
-1. Install ctx: `brew install worktrunk` (or see ctx.ist)
+1. Install ctx (from source, requires Go):
+   ```bash
+   git clone https://github.com/ActiveMemory/ctx.git
+   cd ctx
+   CGO_ENABLED=0 go build -o ctx ./cmd/ctx
+   sudo mv ctx /usr/local/bin/
+   ```
+
+   Or download pre-built binaries from [releases](https://github.com/ActiveMemory/ctx/releases).
+
 2. Initialize ctx in your project: `ctx init`
    - This creates `.context/` with TASKS.md, DECISIONS.md, LEARNINGS.md, CONVENTIONS.md
 3. Copy dragster templates to `.context/`:
    ```bash
-   cp skills/memory/COLLECTIONS.md .context/
-   cp skills/memory/ISSUES.md .context/
+   cp skills/rag-tracking/COLLECTIONS.md .context/
+   cp skills/rag-tracking/ISSUES.md .context/
    ```
 4. Copy ctx configuration (optional, enables hooks):
    ```bash
-   cp skills/memory/ctxrc.template .ctxrc
+   cp skills/rag-tracking/ctxrc.template .ctxrc
    ```
 5. Add dragster-specific patterns to LEARNINGS.md:
    ```bash
